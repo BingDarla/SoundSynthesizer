@@ -1,9 +1,76 @@
-section {
-  margin-top: 50px;
-  text-align: center;
-}
+ * {
+   box-sizing: border-box;
+ }
 
-#btn {
-  width: 200px;
-  height: 50px;
-}
+ #container {
+   max-width: 960px;
+   background-color: grey;
+ }
+
+ #play-table {
+   width: 80%;
+   margin: 1em 1em;
+   display: block;
+   float: left;
+ }
+
+ #control-panner {
+   width: 15%;
+   background-color: #b67abd;
+   float: left;
+   height: 1000px;
+   display: block;
+   margin-top: 15px;
+ }
+
+ .row {
+   width: 100%;
+   background-color: pink;
+ }
+
+ .tone {
+   display: inline-block;
+   width: 6.4%;
+   height: 2em;
+   border: solid 1px black;
+   text-align: center;
+   font-size: 20pt;
+ }
+
+ .selected {
+   background-color: red;
+ }
+
+ .instrument {
+   margin-left: 2em;
+   margin-top: 1em;
+   width: 4em;
+   height: 3em;
+ }
+
+ .choose {
+   background: purple;
+ }
+
+ #play, #save, #clear {
+   margin-left: 1em;
+   margin-top: 1em;
+   width: 6em;
+   height: 3em;
+   background-color: green;
+ }
+
+ .pianoroll {
+   bottom: 0px;
+   opacity: 0;
+   height: 383px;
+   position: absolute;
+   background-color: #fff;
+   width: 2px;
+   left: 0;
+   z-index: 3;
+   opacity: 0;
+   border: 5px solid black;
+   /* transition: opacity .2s; */
+   transform: translateX(0px);
+ }

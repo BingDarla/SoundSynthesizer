@@ -14,7 +14,7 @@
    float: left;
  }
 
- #control-panner {
+ #control-pannel {
    width: 15%;
    background-color: #b67abd;
    float: left;
@@ -52,7 +52,7 @@
    background: purple;
  }
 
- #play, #save, #clear {
+ #play, #save, #clear,#demon {
    margin-left: 1em;
    margin-top: 1em;
    width: 6em;

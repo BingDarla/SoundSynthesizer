@@ -24,10 +24,11 @@ $(document).ready(function() {
     // console.log(tone);
     if (pianoIsSelected) {
       synthNode(val);
+      console.log('piano is selected');
     }
     if (drumIsSelected) {
       drumNode(val);
-      console.log('drum');
+      console.log('drum is selected');
     }
 
 
@@ -90,5 +91,12 @@ $(document).ready(function() {
   $('#clear').click(function(){
     ChordMap.reset();
 
+  });
+  $('#demon').click(function(){
+    $('#music').remove();
+    $('#container').append('<div id="stats"></div>');
+    $('#container').append('<div id="output"></div>');
+
   })
+
 });

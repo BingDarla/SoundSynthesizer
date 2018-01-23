@@ -99,11 +99,27 @@ const drumNode = function(note) {
 
 
 
-const t1 = function(note) {
+const t1 = function() {
+  var osc = new Tone.Oscillator(300+Math.random()*440, "square");
 
-  let synth = new Tone.Oscillator(440, "sine").toMaster() ;
-  synth.triggerAttackRelease(note, "2n");
-  console.log('drum is called');
+  var vibrato = new Tone.LFO(6, -25, 25);
+  vibrato.start();
+  vibrato.connect(osc.detune);
+  // a lowpass filter
+  var lowpass = new Tone.Filter(600, "highpass");
+  osc.connect(lowpass);
+  lowpass.toMaster();
+
+  // envelope
+  var env = new Tone.Envelope(2.5, 0.1, 0.1, 0.2);
+  env.connect(osc.output.gain);
+
+  //connect it to the output
+  osc.setVolume(-10);
+  osc.toMaster();
+  osc.toMaster().start().stop('+0.5');
+  // vibrato.connect(osc.detune);
+
 }
 
 

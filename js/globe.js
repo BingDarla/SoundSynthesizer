@@ -97,7 +97,7 @@ function animate() {
     mesh.position.x = Math.random()*20;
     mesh.position.z = Math.random()*20;
     console.log(flag);
-    crazyMusic();
+    BackgroundMusic.crazyMusic();
   }
   mesh.material.map = planetTexture[index];
   mesh.rotation.y += 0.01;

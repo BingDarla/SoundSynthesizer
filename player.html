@@ -5,27 +5,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Synthesizer</title>
 
 </head>
 
 <body>
   <div id='container'>
+    <h1>Sound Synthesizer</h1>
     <div id="music">
-      <div id="play-table">
-      </div>
       <div id='control-pannel'>
-        <button id='piano' class="instrument">Piano</button>
-        <button id='drum' class="instrument">Drum</button>
-        <button id='save' class="controls">Save</button>
-        <button id='play' class="controls">Play</button>
-        <button id='clear' class="controls">Clear</button>
-        <button id='reset' class="controls">Reset</button>
-        <button id='demon' class="controls">Demon</button>
-
+        <div id='instruments'>
+          <button id='synth1' class="instrument">&#9834;</button>
+          <button id='synth2' class="instrument">&#9834;&#9834;</button>
+          <button id='synth3' class="instrument">&#9834;&#9834;&#9834;</button>
+        </div>
+        <div id="controls">
+          <button id='save' class="control">Save &#10003;</button>
+          <button id='play' class="control">Play &#8883;</button>
+          <button id='clear' class="control">Clear</button>
+          <button id='reset' class="control">Reset</button>
+          <button id='demon' class="control">Demon &#9752;</button>
+          <button id='crazy' class="control">CrazyD &#9732;</button>
+        </div>
+      </div>
+      <div id="key-table">
       </div>
     </div>
-    <audio id="audio" src="images/hapi.mp3" ></audio>
+    <audio id="audio" src="images/hapi.mp3"></audio>
     <div id="stats"></div>
     <div id="output"></div>
 
@@ -36,13 +42,12 @@
 <script src="js/lib/jquery.js" charset="utf-8"></script>
 <script src="js/lib/Tone.js" charset="utf-8"></script>
 <script src="js/lib/three.js" charset="utf-8"></script>
-<script src="js/player.js" charset="utf-8"></script>
+<script src="js/audio.js" charset="utf-8"></script>
 
 <script src="js/globe.js" charset="utf-8"></script>
 <script src="js/index.js" charset="utf-8"></script>
 
 
 <link rel="stylesheet" href="css/style.css">
-<!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
 
 </html>

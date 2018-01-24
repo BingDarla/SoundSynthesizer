@@ -1,7 +1,10 @@
-const ChordMap = {
-  //Each row is one note array[C5...C2] multichoice
-  //15 synth
-
+const Chord = {
+  //variable
+  CHORDS: ['C5', 'B4', 'A4', 'G4', 'F4', 'E4', 'D4', 'C4', 'B3', 'A3', 'G3', 'F3', 'E3', 'D3', 'C2'],
+  pianoPlayList: [],
+  drumPLayList: [],
+  synthPLayList: [],
+  //Each row is one note array[C5...C2] multichoice,chordsmap 14 * 15
   chordsmap: [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -19,11 +22,8 @@ const ChordMap = {
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   ],
-  // chordsmap 14 * 15
-  CHORDS: ['C5', 'B4', 'A4', 'G4', 'F4', 'E4', 'D4', 'C4', 'B3', 'A5', 'G3', 'F3', 'E3', 'D3', 'C2'],
-  pianoPlayList: [],
-  drumPLayList: [],
 
+  //methods
   //function to generate the whole gridTable
   gridTable: function() {
     for (let i = 0; i < 14; i++) {
@@ -31,7 +31,7 @@ const ChordMap = {
       let name = this.CHORDS[i];
       let $row = $('<div>');
       $row.attr('class', 'row');
-      $('#play-table').append($row);
+      $('#key-table').append($row);
       for (let j = 0; j < 15; j++) {
         $col = $('<div>');
         let id = j.toString() + ' ' + i.toString();
@@ -60,8 +60,43 @@ const ChordMap = {
       console.log(`tone is ${tone}`);
       playList.push(tone);
     }
-    console.log(playList);
     return playList;
+  },
+  //
+  playTones: function() {
+
+    let step = $(".tone").width();
+    console.log(step);
+    if (Chord.pianoPlayList != undefined) {
+      Chord.pianoPlayList.forEach((tone, index) => {
+        setTimeout(() => {
+          Instrument.poly(tone.length, tone);
+        }, 500 * index);
+      });
+    }
+
+    if (Chord.drumPlayList != undefined) {
+      Chord.drumPlayList.forEach((tone, index) => {
+        setTimeout(() => {
+          Instrument.drumNode(tone[0])
+        }, 500 * index);
+      });
+    }
+
+    if (Chord.synthPlayList != undefined) {
+      Chord.synthPlayList.forEach((tone, index) => {
+        setTimeout(() => {
+          Instrument.synthNode(tone[0])
+        }, 500 * index);
+      });
+    }
+    Chord.CHORDS.forEach((tone, index) => {
+      setTimeout(() => {
+        $('#playroll').css('margin-left'), 100 + 'px'
+      }, 500 * index);
+    })
+
+
   },
   //clear all the selected tones;
   gridsClear: function() {
@@ -84,92 +119,71 @@ const ChordMap = {
     ];
     $('.tone').removeClass('selected');
   },
+  //reset function, clear all the playList array
   reset: function() {
     this.pianoPlayList = [];
     this.drumPLayList = [];
+    this.synthPLayList = [];
     this.gridsClear();
   }
 };
 
-const synthNode = function(note) {
-  let synth = new Tone.Synth().toMaster();
-  synth.triggerAttackRelease(note, '16n');
-};
 
-const drumNode = function(note) {
-  console.warn( note );
-  var synth = new Tone.MonoSynth({
-    "detune": 10,
-    "oscillator": {
-      "type": "sawtooth"
-    },
-    "filter": {
-      Q: 6,
-      "type": "lowpass",
-      "rolloff": -24
-    },
-    "envelope": {
-      "attack": 0.005,
-      "decay": 0.1,
-      "sustain": 0.9,
-      "release": 1
-    },
-    "filterEnvelope": {
-      "attack": 0.06,
-      "decay": 0.2,
-      "sustain": 1,
-      "release": 2,
-      "baseFrequency": 200,
-      "octaves": 7,
-      "exponent": 2
-    }
-  }).toMaster();
-  synth.triggerAttackRelease(note, "16n");
-  console.log('drum is called');
+//instrument
+//sound creation functions
+const Instrument = {
+  pianoNode: function(node) {
+    let synth = new Tone.Synth().toMaster();
+    synth.triggerAttackRelease(node, '16n');
+  },
+  //second instrument
+  drumNode: function(node) {
+    if (!node)
+      return;
+    var synth = new Tone.MonoSynth().toMaster();
+    synth.triggerAttackRelease(node, "16n");
+  },
+  //thirdinstrument
+  synthNode: function(node) {
+    let synth = new Tone.DuoSynth({
+      voice0: {
+        volume: 40,
+      },
+      envelope: {
+        attack: 0.2,
+        decay: 0,
+        sustain: 1,
+        release: 0.5
+      }
+    }).toMaster();
+    synth.volume = 20;
+    synth.triggerAttackRelease(node, '16n');
+  },
+
+  poly: function(tones, chordArray) {
+    let polySynth = new Tone.PolySynth(tones, Tone.Synth).toMaster();
+    polySynth.triggerAttackRelease(chordArray, '16n');
+  }
 }
 
 
+//background music for the crazy demon
+const BackgroundMusic = {
+  musicPlay: function() {
+    var audio = document.getElementById("audio");
+    audio.play();
+  },
 
-function backgroundMusic() {
-  var audio = document.getElementById("audio");
-  audio.play();
-}
+  crazyMusic: function() {
+    var osc = new Tone.Oscillator(300 + Math.random() * 440, "square");
 
-
-
-const crazyMusic = function() {
-  var osc = new Tone.Oscillator(300 + Math.random() * 440, "square");
-
-  var vibrato = new Tone.LFO(6, -25, 25);
-  vibrato.start();
-  vibrato.connect(osc.detune);
-  // a lowpass filter
-  var lowpass = new Tone.Filter(600, "highpass");
-  osc.connect(lowpass);
-  lowpass.toMaster();
-
-  // envelope
-
-  //connect it to the output
-
-  osc.toMaster().start().stop('+0.05');
-  // vibrato.connect(osc.detune);
-
-}
-
-
-
-
-
-
-
-const poly = function(tones, chordArray) {
-  let polySynth = new Tone.PolySynth(tones, Tone.Synth).toMaster();
-   console.log(chordArray);
-  polySynth.triggerAttackRelease(chordArray, '16n');
-};
-
-const drum = function(tones, chordArray) {
-  let polySynth = new Tone.PolySynth(tones, Tone.MonoSynt).toMaster();
-  polySynth.triggerAttackRelease(chordArray, '16n');
+    var vibrato = new Tone.LFO(6, -25, 25);
+    vibrato.start();
+    vibrato.connect(osc.detune);
+    // a lowpass filter
+    var lowpass = new Tone.Filter(600, "highpass");
+    osc.connect(lowpass);
+    lowpass.toMaster();
+    osc.toMaster().start().stop('+0.05');
+  }
 }

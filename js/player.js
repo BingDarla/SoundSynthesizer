@@ -35,7 +35,9 @@ const ChordMap = {
       for (let j = 0; j < 15; j++) {
         $col = $('<div>');
         let id = j.toString() + ' ' + i.toString();
+        // let backgroundColor = 'rgb( '+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')'
         $col.attr('id', id).attr('class', 'tone');
+        // $col.css('background-color',backgroundColor);
         $col.text(name);
         $row.append($col);
       }
@@ -62,9 +64,7 @@ const ChordMap = {
     return playList;
   },
   //clear all the selected tones;
-  reset: function() {
-    this.pianoPlayList = [];
-    this.drumPLayList = [];
+  gridsClear: function() {
     this.chordsmap = [
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -83,6 +83,11 @@ const ChordMap = {
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     ];
     $('.tone').removeClass('selected');
+  },
+  reset: function() {
+    this.pianoPlayList = [];
+    this.drumPLayList = [];
+    this.gridsClear();
   }
 };
 
@@ -92,15 +97,48 @@ const synthNode = function(note) {
 };
 
 const drumNode = function(note) {
-  let synth = new Tone.MembraneSynth().toMaster();
-  synth.triggerAttackRelease(note, "8n");
+  console.warn( note );
+  var synth = new Tone.MonoSynth({
+    "detune": 10,
+    "oscillator": {
+      "type": "sawtooth"
+    },
+    "filter": {
+      Q: 6,
+      "type": "lowpass",
+      "rolloff": -24
+    },
+    "envelope": {
+      "attack": 0.005,
+      "decay": 0.1,
+      "sustain": 0.9,
+      "release": 1
+    },
+    "filterEnvelope": {
+      "attack": 0.06,
+      "decay": 0.2,
+      "sustain": 1,
+      "release": 2,
+      "baseFrequency": 200,
+      "octaves": 7,
+      "exponent": 2
+    }
+  }).toMaster();
+  synth.triggerAttackRelease(note, "16n");
   console.log('drum is called');
 }
 
 
 
-const t1 = function() {
-  var osc = new Tone.Oscillator(300+Math.random()*440, "square");
+function backgroundMusic() {
+  var audio = document.getElementById("audio");
+  audio.play();
+}
+
+
+
+const crazyMusic = function() {
+  var osc = new Tone.Oscillator(300 + Math.random() * 440, "square");
 
   var vibrato = new Tone.LFO(6, -25, 25);
   vibrato.start();
@@ -111,13 +149,10 @@ const t1 = function() {
   lowpass.toMaster();
 
   // envelope
-  var env = new Tone.Envelope(2.5, 0.1, 0.1, 0.2);
-  env.connect(osc.output.gain);
 
   //connect it to the output
-  osc.setVolume(-10);
-  osc.toMaster();
-  osc.toMaster().start().stop('+0.5');
+
+  osc.toMaster().start().stop('+0.05');
   // vibrato.connect(osc.detune);
 
 }
@@ -130,10 +165,11 @@ const t1 = function() {
 
 const poly = function(tones, chordArray) {
   let polySynth = new Tone.PolySynth(tones, Tone.Synth).toMaster();
+   console.log(chordArray);
   polySynth.triggerAttackRelease(chordArray, '16n');
 };
 
 const drum = function(tones, chordArray) {
-  let polySynth = new Tone.MembraneSynth(tones, Tone.Synth).toMaster();
+  let polySynth = new Tone.PolySynth(tones, Tone.MonoSynt).toMaster();
   polySynth.triggerAttackRelease(chordArray, '16n');
 }

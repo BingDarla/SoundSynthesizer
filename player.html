@@ -11,19 +11,21 @@
 
 <body>
   <div id='container'>
-    <!-- <div id="music">
+    <div id="music">
       <div id="play-table">
       </div>
       <div id='control-pannel'>
         <button id='piano' class="instrument">Piano</button>
         <button id='drum' class="instrument">Drum</button>
-        <button id='save'>Save</button>
-        <button id='play'>Play</button>
-        <button id='clear'>Clear</button>
-        <button id='demon'>Demon</button>
+        <button id='save' class="controls">Save</button>
+        <button id='play' class="controls">Play</button>
+        <button id='clear' class="controls">Clear</button>
+        <button id='reset' class="controls">Reset</button>
+        <button id='demon' class="controls">Demon</button>
 
       </div>
-    </div> -->
+    </div>
+    <audio id="audio" src="images/hapi.mp3" ></audio>
     <div id="stats"></div>
     <div id="output"></div>
 
@@ -31,20 +33,14 @@
 
 
 </body>
-<script src="js/jquery.js" charset="utf-8"></script>
-<!-- <script src="js/Tone.min.js" charset="utf-8"></script> -->
-
-<script src="js/music/Tone.js" charset="utf-8"></script>
-<!-- <script src="js/music/player.js" charset="utf-8"></script> -->
-<!-- <script src="js/music/audio.js" charset="utf-8"></script> -->
-<script src="js/three/three.js" charset="utf-8"></script>
-<!-- <script src="js/three/datGui.js" charset="utf-8"></script> -->
-<!-- <script src="js/three/orbitControls.js" charset="utf-8"></script> -->
-<!-- <script src="js/three/stats.js" charset="utf-8"></script> -->
-
+<script src="js/lib/jquery.js" charset="utf-8"></script>
+<script src="js/lib/Tone.js" charset="utf-8"></script>
+<script src="js/lib/three.js" charset="utf-8"></script>
+<script src="js/player.js" charset="utf-8"></script>
 
 <script src="js/globe.js" charset="utf-8"></script>
-<!-- <script src="js/index.js" charset="utf-8"></script> -->
+<script src="js/index.js" charset="utf-8"></script>
+
 
 <link rel="stylesheet" href="css/style.css">
 <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->

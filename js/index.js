@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
   console.log('The document is ready');
   ChordMap.gridTable();
   let drumIsSelected = false;
@@ -28,6 +29,7 @@ $(document).ready(function() {
     }
     if (drumIsSelected) {
       drumNode(val);
+      // t1();
       console.log('drum is selected');
     }
 
@@ -57,24 +59,26 @@ $(document).ready(function() {
       drumIsSelected = false;
     }
   });
-  $('#save').click(function(){
-      if (pianoIsSelected){
-        ChordMap.pianoPlayList=[];
-        ChordMap.pianoPlayList=ChordMap.toneMap();
-      }
-      if (drumIsSelected){
-        ChordMap.drumPlayList=[];
-        ChordMap.drumPlayList=ChordMap.toneMap();
+  $('#save').click(function() {
+    if (pianoIsSelected) {
+      ChordMap.pianoPlayList = [];
+      ChordMap.pianoPlayList = ChordMap.toneMap();
+    }
+    if (drumIsSelected) {
+      ChordMap.drumPlayList = [];
+      ChordMap.drumPlayList = ChordMap.toneMap();
 
-      }
+    }
 
   });
   $('#play').click(function() {
 
-    // console.log(ChordMap.pianoPlayList);
+    console.log(`piano list :${ChordMap.pianoPlayList}`);
+    console.log(`drum list :${ChordMap.drumPlayList}`);
+
     ChordMap.pianoPlayList.forEach((tone, index) => {
       setTimeout(() => {
-
+console.log('piano', index);
         poly(tone.length, tone);
       }, 500 * index);
     });
@@ -82,20 +86,30 @@ $(document).ready(function() {
       setTimeout(() => {
 
 
+        drumNode(tone[0])
+
+
       }, 500 * index);
     });
     // setTimeout(() => {
     // }, 500 * 17);
   });
+  $('#clear').click(function() {
+    ChordMap.gridsClear();
 
-  $('#clear').click(function(){
+  });
+
+  $('#reset').click(function() {
     ChordMap.reset();
 
   });
-  $('#demon').click(function(){
+
+  $('#demon').click(function() {
     $('#music').remove();
-    $('#container').append('<div id="stats"></div>');
-    $('#container').append('<div id="output"></div>');
+    backgroundMusic();
+    setInterval(backgroundMusic,14000);
+    init();
+    animate();
 
   })
 

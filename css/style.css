@@ -3,9 +3,7 @@
   box-sizing: border-box;
 }
 
-.container {
-  opacity: 0.5;
-}
+
 
 body {
   background-image: url('../images/background1.jpg');
@@ -14,6 +12,7 @@ body {
 
 #container {
   max-width: 960px;
+  margin: 0 auto;
 }
 
 h1 {

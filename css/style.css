@@ -111,9 +111,9 @@ h1 {
 }
 
 #playroll {
-
+  visibility: hidden;
   position: absolute;
-  height:107%;
+  height:80%;
   margin-top:-2em;
   border: 5px solid #f11de0;
   transform: translateX(0px);

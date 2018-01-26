@@ -38,10 +38,8 @@ $(document).ready(function() {
     }
     if (synth3IsSelected) {
       Instrument.synthNode(val);
-      console.log('drum is selected');
+      console.log('synth3 is selected');
     }
-
-    console.log(Chord.chordsmap);
   });
 
 
@@ -115,12 +113,12 @@ $(document).ready(function() {
     Chord.reset();
   });
   //set demon
-  $("#demon").click(function() {
+  $("#demo").click(function() {
 
     Chord.pianoPlayList = [["D4"],["F4"],["G4"],["F4"],["D4"],[],["E4"],["F4"],["G4"],["F4"],["E4"],[],["D4"],["F4"]];
     Chord.drumPlayList =[["G4"],[],[],[],["G4"],["A4"],[],[],[],["E4"],["F4"],["F4"],[],["F4"]];
     Chord.synthPlayList = [["D4"],["F4"],["G4"],["F4"],["D4"],[],["E4"],["F4"],["G4"],["F4"],["E4"],[],["D4"],["F4"]];
-    console.log('Demon code loaded');
+    console.log('Demo code loaded');
     setTimeout(Chord.playTones,500);
     console.log(Chord.pianoPlayList);
     console.log(Chord.drumPlayList);

@@ -104,6 +104,7 @@ $(document).ready(function() {
     Chord.playTones();
 
 
+
   });
   //clear all the selected note
   $('#clear').click(function() {

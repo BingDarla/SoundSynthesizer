@@ -67,6 +67,7 @@ const Chord = {
 
     let step = $(".tone").width();
     console.log(step);
+
     if (Chord.pianoPlayList != undefined) {
       Chord.pianoPlayList.forEach((tone, index) => {
         setTimeout(() => {
@@ -90,9 +91,17 @@ const Chord = {
         }, 500 * index);
       });
     }
-    Chord.CHORDS.forEach((tone, index) => {
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1].forEach((tone, index) => {
+
       setTimeout(() => {
-        $('#playroll').css('margin-left'), 100 + 'px'
+        let a = step*(index+1)*1.03;
+        let style = {
+          "margin-left": "0px"
+        }
+        style["margin-left"]=a+"px";
+        
+        $('#playroll').css( style );
+
       }, 500 * index);
     })
 

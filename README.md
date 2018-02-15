@@ -3,7 +3,7 @@
 This is a funny Synthesizer appication buit with Tone.js and Three.js <br>
 The demon is here: https://bingdarla.github.io/SoundSynthesizer/<br>
 To Play with this fun App:<br>
-<img src="https://res.cloudinary.com/dc5fpkcwj/image/upload/v1518659632/sound_demo_fjuhto.gif" alt="sound synthesizer demo" style="width:90%;">
+<img src="https://res.cloudinary.com/dc5fpkcwj/image/upload/v1518659632/sound_demo_fjuhto.gif" alt="sound synthesizer demo" width:600px">
 
 Choose the instrument(3 options) you wish to use and click the notes in the screen to edit your music.C2 is Middle C on the keyboard. C3 is one octave higher, C1 is one octave lower, and so on.<br>
      

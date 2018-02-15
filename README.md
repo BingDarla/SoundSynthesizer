@@ -1,16 +1,13 @@
 # SoundSynthesizer
 
-This is a funny Synthesizer appication
-The demon is here: https://bingdarla.github.io/SoundSynthesizer/
-To Play with this fun App:
-    Choose the synthesezer you like and click the key to edit your music.(can be multi-choice).
-    Click Save button
-    Then Click Play.
-    Now enjoy your music
-You also can run demon: pre-edited-music data.
+This is a funny Synthesizer appication buit with Tone.js and Three.js <br>
+The demon is here: https://bingdarla.github.io/SoundSynthesizer/<br>
+To Play with this fun App:<br>
+<img src="https://github.com/BingDarla/SoundSynthesizer/blob/master/images/sample.gif" width="300" height="80" /><br>
+Choose the instrument(3 options) you wish to use and click the notes in the screen to edit your music.C2 is Middle C on the keyboard. C3 is one octave higher, C1 is one octave lower, and so on.<br>
+     
+Click Save button to save the edited music and play it<br>
+To switch to different instruments, just click the  buttons ♪,♪♪, ♪♪♪ on the tool bar.<br>
+According to which instruments are selected, the output will sound different. <br>
 
-To run the CrazyD need to start server .  
-python -m SimpleHTTPServer 
-(Don't forget lowver down the volumn of sound)
-
-The app used ThreeJs ane Tonejs.
+Note: clear button only resets the note on screen instead of clears music data in the memory.
